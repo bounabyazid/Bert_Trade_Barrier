@@ -2,9 +2,9 @@ https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinl/starting-and
 
 pip install mysql-connector-python
 
-GRANT ALL PRIVILEGES ON *.* TO 'polo'@'localhost' IDENTIFIED BY 'Polo12369*';
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY '*****';
 exit
-mysql -u polo -p
+mysql -u username -p
 pw
 
 CREATE DATABASE T_barrier;
@@ -80,9 +80,9 @@ CREATE DATABASE T_barrier CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 ALTER DATABASE T_barrier CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-mysqldump -u polo -p T_barrier > /home/polo/Desktop/T_Barrier.dmp
+mysqldump -u username -p T_barrier > /path/T_Barrier.dmp
 
-mysql -u polo -p T_barrier2 < T_Barrier.dmp
+mysql -u username -p T_barrier2 < T_Barrier.dmp
 
 SELECT * FROM Sources WHERE MATCH (Name) AGAINST ('FUZZY FORM OF "gro"');
 
