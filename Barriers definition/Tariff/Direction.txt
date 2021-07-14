@@ -1,0 +1,2 @@
+Direction: import and export tariffs
+Tariffs are often levied depending on the direction of product movement, which means on imports or exports. Export tariffs, used less often than import tariffs, are usually imposed on resources and raw materials that are present in the exporting country in small amounts and rarely on finished manufactured products.
