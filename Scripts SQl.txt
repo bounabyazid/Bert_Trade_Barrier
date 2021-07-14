@@ -1,0 +1,109 @@
+https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinl/starting-and-stopping-oracle-database.html
+
+pip install mysql-connector-python
+
+GRANT ALL PRIVILEGES ON *.* TO 'polo'@'localhost' IDENTIFIED BY 'Polo12369*';
+exit
+mysql -u polo -p
+pw
+
+CREATE DATABASE T_barrier;
+
+SHOW DATABASES;
+
+SHOW SCHEMAS;
+
+CREATE DATABASE T_barrier CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE T_barrier;
+
+DROP TABLE IF EXISTS Urls;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Sources;
+DROP TABLE IF EXISTS Sections;
+DROP TABLE IF EXISTS Topics;
+DROP TABLE IF EXISTS Answers;
+
+CREATE TABLE IF NOT EXISTS Urls (
+	Id INT NOT NULL AUTO_INCREMENT,
+	Url Text,
+	PRIMARY KEY (Id)
+);
+
+CREATE TABLE IF NOT EXISTS Users (
+	Id INT NOT NULL AUTO_INCREMENT,
+	Username VARCHAR(60),
+	PRIMARY KEY (Id)
+);
+
+CREATE TABLE IF NOT EXISTS Sources (
+	Id INT NOT NULL AUTO_INCREMENT,
+	Name VARCHAR(40),
+	Url Text,
+	PRIMARY KEY (Id)
+);
+
+CREATE TABLE IF NOT EXISTS Sections (
+	Id INT NOT NULL AUTO_INCREMENT,
+	Source INT,
+	Title Text,
+	Url Text,
+	PRIMARY KEY (Id)
+);
+
+CREATE TABLE IF NOT EXISTS Topics (
+	Id INT NOT NULL AUTO_INCREMENT,
+	Section INT,
+	Title Text,
+	Text Text,
+	Date Text,
+	Author INT,
+	PRIMARY KEY (Id)
+);
+
+CREATE TABLE IF NOT EXISTS Answers (
+	Id INT NOT NULL AUTO_INCREMENT,
+	Topic INT,
+	Text Text,
+	Date Text,
+	Author INT,
+	PRIMARY KEY (Id)
+);
+
+ALTER TABLE Users AUTO_INCREMENT = 1;
+ALTER TABLE Sources AUTO_INCREMENT = 1;
+ALTER TABLE Sections AUTO_INCREMENT = 1;
+ALTER TABLE Topics AUTO_INCREMENT = 1;
+ALTER TABLE Answers AUTO_INCREMENT = 1;
+
+CREATE DATABASE T_barrier CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+ALTER DATABASE T_barrier CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+mysqldump -u polo -p T_barrier > /home/polo/Desktop/T_Barrier.dmp
+
+mysql -u polo -p T_barrier2 < T_Barrier.dmp
+
+SELECT * FROM Sources WHERE MATCH (Name) AGAINST ('FUZZY FORM OF "gro"');
+
+SELECT * FROM Sources WHERE SOUNDEX(Name) = SOUNDEX('gro');
+
+SELECT * FROM Sources WHERE SOUNDEX(Name) LIKE SOUNDEX('gro');
+
+SELECT * FROM Sources WHERE Name LIKE CONCAT('%',SOUNDEX('gro'),'%');
+
+
+SELECT * FROM Sources WHERE MATCH (Name) AGAINST ('forum' IN NATURAL LANGUAGE MODE);
+ALTER TABLE Sources ADD FULLTEXT index_name(Name);
+
+
+ALTER TABLE Answers ADD FULLTEXT index_name(Text);
+SELECT * FROM Answers WHERE MATCH (Text) AGAINST ('Turku' IN NATURAL LANGUAGE MODE);
+
+ON WINDOWS:
+
+CMD: set path=C:\Program Files\MySQL\MySQL Server 5.5\bin
+CMD: Drop DATABASE T_barrier;
+CMD: CREATE DATABASE T_barrier CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CMD: USE T_barrier;
+CMD: mysql -u polo -p T_barrier < C:\T_Barrier.dmp
